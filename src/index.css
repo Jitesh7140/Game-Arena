@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* * {
+    @apply border;
+  } */
+  body {
+    @apply bg-black text-white font-rajdhani;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .gaming-card {
+    @apply bg-dark-50 border border-dark-200 rounded-xl p-6 backdrop-blur-sm;
+    background: linear-gradient(145deg, rgba(24, 24, 27, 0.8), rgba(39, 39, 42, 0.6));
+    box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1);
+  }
+  
+  .gaming-button {
+    @apply px-6 py-3 rounded-lg font-orbitron font-semibold text-sm uppercase tracking-wider transition-all duration-300;
+    background: linear-gradient(135deg, #00d4ff, #8b5cf6);
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+  }
+  
+  .gaming-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.5);
+  }
+  
+  .gaming-input {
+    @apply bg-dark-100 border border-dark-200 rounded-lg px-4 py-3 text-white placeholder-dark-400 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20;
+  }
+  
+  .neon-border {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    border: 1px solid rgba(0, 212, 255, 0.5);
+  }
+  
+  .neon-glow {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6), 0 0 40px rgba(139, 92, 246, 0.3);
+  }
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: linear-gradient(45deg, #00d4ff, #8b5cf6);
+  border-radius: 50%;
+}
+
+.particle:nth-child(odd) {
+  background: linear-gradient(45deg, #8b5cf6, #00d4ff);
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom loading spinner */
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 212, 255, 0.1);
+  border-left: 4px solid #00d4ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

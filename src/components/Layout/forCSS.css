@@ -1,0 +1,3 @@
+.marginfix {
+        margin-left : calc(0rem * calc(1 - var(--tw-space-x-reverse))) !important;
+}

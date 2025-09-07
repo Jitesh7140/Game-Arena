@@ -47,42 +47,40 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-useEffect(() => {
-  const getInitialSession = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    setUser(session?.user ?? null);
-
-    if (session?.user) {
-      const { data } = await getUserProfile(session.user.id);
-      setProfile(data);
-    }
-
-    setLoading(false);
-  };
-
-  getInitialSession();
-
-  // Supabase v2 syntax
-  const { data: { subscription } } = supabase.auth.onAuthStateChange(
-    async (_event, session) => {
+  useEffect(() => {
+    // Get initial session
+    const getInitialSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
       setUser(session?.user ?? null);
-
+      
       if (session?.user) {
         const { data } = await getUserProfile(session.user.id);
         setProfile(data);
-      } else {
-        setProfile(null);
       }
-
+      
       setLoading(false);
-    }
-  );
+    };
 
-  return () => {
-    subscription.unsubscribe();
-  };
-}, []);
+    getInitialSession();
 
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (_sessionEvent, session) => {
+        setUser(session?.user ?? null);
+        
+        if (session?.user) {
+          const { data } = await getUserProfile(session.user.id);
+          setProfile(data);
+        } else {
+          setProfile(null);
+        }
+        
+        setLoading(false);
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const signOut = async () => {
     await supabase.auth.signOut();
